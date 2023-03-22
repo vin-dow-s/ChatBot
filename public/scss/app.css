@@ -5,6 +5,11 @@
 * textarea, * input {
   outline: none;
 }
+* button {
+  background: transparent;
+  outline: none;
+  border: none;
+}
 
 body {
   background-image: url("../images/endless-constellation.svg");
@@ -49,7 +54,6 @@ body {
   font-family: "Supreme", sans-serif;
 }
 .container .messages-user .__user {
-  text-align: right;
   width: fit-content;
   height: fit-content;
   margin-right: 0.2em;
@@ -96,7 +100,7 @@ body {
   font-family: "Supreme", sans-serif;
   font-size: medium;
 }
-.container .type-bar > img {
+.container .type-bar img {
   height: 20px;
   padding: 10px;
 }
