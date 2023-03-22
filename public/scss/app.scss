@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+    textarea, input {
+        outline: none;
+    }
+}
+
+$black: #000;
+$white: #FFF;
+$grey: #808080;
+
+body {
+    background-image: url("../images/endless-constellation.svg");
+    font-family: 'Technor', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-top: 3em;
+    color: $white;
+
+    p {
+        color: $grey;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin: 2em;
+    color: $white;
+
+    .chat-window {
+        position: relative;
+        width: 35%;
+        height: 75vh;
+        border: 1px solid $white;
+        border-radius: 10px;
+        overflow-y: auto;
+        background: rgba(0, 0, 0, 0.5);
+
+        img {
+            filter: invert(1);
+        }
+    }
+
+    .messages-user {
+        display: flex;
+        justify-content: end;
+        float: right;
+        width: 60%;
+        height: 2em;
+        margin: .5em;
+        padding-top: 1em;
+        font-family: 'Supreme', sans-serif;
+
+        .__user {
+            text-align: right;
+            width: fit-content;
+            height: fit-content;
+            margin-right: .2em;
+            padding: .4em;
+            background: lightgreen;
+            border-radius: 5px;
+            color: $black;
+        }
+    }
+    .messages-bot {
+        display: flex;
+        justify-content: left;
+        width: 60%;
+        height: 2em;
+        margin: .5em;
+        font-family: 'Supreme', sans-serif;
+
+        .__bot {
+            text-align: left;
+            width: fit-content;
+            height: fit-content;
+            margin-left: .3em;
+            padding: .4em;
+            background: $grey;
+            border-radius: 5px;
+            color: $black;
+            filter: brightness(150%);
+        }
+    }
+
+    .type-bar {
+        position: absolute;
+        display: flex;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 5px;
+        border-top: 1px solid $white;
+
+        > input {
+            width: 100%;
+            padding: 10px;
+            margin-right: 10px;
+            border: none;
+            color: $white;
+            background: transparent;
+            font-family: 'Supreme', sans-serif;
+            font-size: medium;
+        }
+
+        > img {
+            height: 20px;
+            padding: 10px;
+        }
+    }
+}
+
+@media (max-width:1025px) {
+    .container {
+        .chat-window {
+            width: 75%;
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .container {
+        .chat-window {
+            width: 100%;
+        }
+    }
+}
