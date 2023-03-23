@@ -27,12 +27,14 @@
                 <!-- Div messages-user AJAX -->
                 <!-- Div messages-bot AJAX -->
                 <div class="type-bar">
-                        <input id="input" name="input" type="text" placeholder="Entrez votre message...">
-                        <button id="button-submit"><img src="{{ asset('/images/send.png') }}" alt="send"></button>
+                    <input id="input" name="input" type="text" placeholder="Entrez votre message...">
+                    <button id="button-submit"><img src="{{ asset('/images/send.png') }}" alt="send"></button>
+                    <button id="button-clean"><img src="{{ asset('/images/clean.png') }}" id="btn-clean" alt="clean"></button>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         //CSRF TOKEN
         const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -45,6 +47,7 @@
         const chatWindow = document.getElementById('chat-window');
         const url = '{{ url('/api/send') }}';
         const inputField = document.getElementById('input');
+        const clean = document.getElementById('button-clean');
 
         //API FETCH AND HTML UPDATE
         function fetchAndUpdateHTML() {
@@ -90,6 +93,20 @@
 
         //CALL FETCH ON BUTTON CLICK
         button.addEventListener('click', fetchAndUpdateHTML);
+
+        //REMOVE MESSAGES FROM CHAT WINDOW
+        clean.addEventListener('click', function () {
+            const messagesUser = chatWindow.getElementsByClassName("messages-user");
+            const messagesBot = chatWindow.getElementsByClassName("messages-bot");
+
+            while(messagesUser.length > 0) {
+                messagesUser[0].parentNode.removeChild(messagesUser[0]);
+            }
+
+            while(messagesBot.length > 0) {
+                messagesBot[0].parentNode.removeChild(messagesBot[0]);
+            }
+        });
 
         //CALL FETCH ON ENTER KEY
         inputField.addEventListener('keydown', function (event){

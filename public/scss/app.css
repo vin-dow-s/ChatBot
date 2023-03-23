@@ -37,7 +37,7 @@ body {
   height: 75vh;
   border: 1px solid #FFF;
   border-radius: 10px;
-  overflow-y: auto;
+  overflow-y: hidden;
   background: rgba(0, 0, 0, 0.5);
 }
 .container .chat-window img {
@@ -84,11 +84,14 @@ body {
 .container .type-bar {
   position: absolute;
   display: flex;
+  z-index: 1;
   left: 0;
   right: 0;
   bottom: 0;
+  margin-top: 2em;
   padding: 5px;
   border-top: 1px solid #FFF;
+  background: #000;
 }
 .container .type-bar > input {
   resize: none;
@@ -104,6 +107,11 @@ body {
 .container .type-bar img {
   height: 20px;
   padding: 10px;
+  cursor: pointer;
+}
+.container .type-bar img#btn-clean {
+  height: 25px;
+  width: 25px;
 }
 
 @media (max-width: 1025px) {
