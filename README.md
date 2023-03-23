@@ -1,5 +1,5 @@
-# ChatBot
-### OpenAI API - ChatGPT 3.5
+# ChatBot :computer:
+### OpenAI API - ChatGPT 3.5 :robot:
 This Laravel project uses the following OpenAI API : https://github.com/openai-php/laravel with a backend implementation.
 
 The route is defined in ``api.php`` and calls the function in ``ChatBotController`` which uses the OpenAI completion method with following parameters :   
