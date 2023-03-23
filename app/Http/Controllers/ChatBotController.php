@@ -10,9 +10,9 @@ class ChatBotController extends Controller
     public function sendChat(Request $request): string
     {
         $result = OpenAI::completions()->create([
-            'max-token' => 100,
+            'max_tokens' => 150,
             'model' => 'text-davinci-003',
-            'prompt' => $request->input
+            'prompt' => $request->input('input')
         ]);
 
         $response = array_reduce(

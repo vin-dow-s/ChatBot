@@ -43,15 +43,20 @@ body {
 .container .chat-window img {
   filter: invert(1);
 }
-.container .messages-user {
+.container .messages-user, .container .messages-bot {
   display: flex;
+  width: 60%;
+  height: auto;
+  margin: 0.5em;
+  font-family: "Supreme", sans-serif;
+}
+.container .messages-user img, .container .messages-bot img {
+  width: 40px;
+  height: 40px;
+}
+.container .messages-user {
   justify-content: end;
   float: right;
-  width: 60%;
-  height: 2em;
-  margin: 0.5em;
-  padding-top: 1em;
-  font-family: "Supreme", sans-serif;
 }
 .container .messages-user .__user {
   width: fit-content;
@@ -63,12 +68,7 @@ body {
   color: #000;
 }
 .container .messages-bot {
-  display: flex;
   justify-content: left;
-  width: 60%;
-  height: 2em;
-  margin: 0.5em;
-  font-family: "Supreme", sans-serif;
 }
 .container .messages-bot .__bot {
   text-align: left;
@@ -91,6 +91,7 @@ body {
   border-top: 1px solid #FFF;
 }
 .container .type-bar > input {
+  resize: none;
   width: 100%;
   padding: 10px;
   margin-right: 10px;

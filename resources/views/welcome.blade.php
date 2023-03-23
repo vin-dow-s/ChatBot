@@ -24,10 +24,10 @@
         </div>
         <div class="container">
             <div id="chat-window" class="chat-window">
-                <!-- Div messages-user APPEND HERE -->
-                <!-- Div messages-bot APPEND HERE -->
+                <!-- Div messages-user AJAX -->
+                <!-- Div messages-bot AJAX -->
                 <div class="type-bar">
-                        <input id="input" type="text" placeholder="Entrez votre message...">
+                        <input id="input" name="input" type="text" placeholder="Entrez votre message...">
                         <button id="button-submit"><img src="{{ asset('/images/send.png') }}" alt="send"></button>
                 </div>
             </div>
@@ -40,47 +40,70 @@
         xhr.open('GET', 'https://api.openai.com/v1/chat/completions', true);
         xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
 
+        //VARIABLES
         const button = document.getElementById('button-submit');
         const chatWindow = document.getElementById('chat-window');
-        const url = '{{ url('/send') }}';
+        const url = '{{ url('/api/send') }}';
+        const inputField = document.getElementById('input');
 
-        //API FETCH ON BUTTON CLICK
-        button.addEventListener('click', function (){
+        //API FETCH AND HTML UPDATE
+        function fetchAndUpdateHTML() {
             const input = document.getElementById('input').value;
+            if(isInputValid(input)){
+                chatWindow.insertAdjacentHTML('beforeend', `<div class="messages-user">
+                                <div class="__user">
+                                    <p>${input}</p>
+                                </div>
+                                <img src="{{ asset('/images/avatar.png') }}" alt="Avatar">
+                                <div style="clear: both"></div>
+                                </div>`);
+                inputField.value = '';
 
-            chatWindow.innerHTML += `<div class="messages-user">
-            <div class="__user">
-                <p>${input}</p>
-            </div>
-            <img src="{{ asset('/images/avatar.png') }}" alt="Avatar">
-            <div style="clear: both"></div>
-        </div>`;
-
-            fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(input),
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer "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"',
-                }
-            }).then(function(response) {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    throw new Error('Server error.');
-                }
-            }).then(function(data) {
-                chatWindow.innerHTML += `<div class="messages-bot">
+                fetch(url, {
+                    method: 'POST',
+                    body: JSON.stringify({input: input}),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                }).then(function (response) {
+                    if (response.ok) {
+                        console.log(response);
+                        return response.text();
+                    } else {
+                        throw new Error('Server error.');
+                    }
+                }).then(function (data) {
+                    chatWindow.insertAdjacentHTML('beforeend', `<div class="messages-bot">
+                                <img src="{{ asset('/images/chatbot.png') }}" alt="Avatar">
                                 <div class="__bot">
                                     <p>${data}</p>
                                 </div>
-                                <img src="{{ asset('/images/chatbot.png') }}" alt="Avatar">
                                 </div>
-                                `;
-            }).catch(function(error) {
-                console.log('Fetch error:', error.message);
-            });
-        });
+                                `);
+                    const typeBar = document.querySelector('.type-bar');
+                    typeBar.scrollIntoView({block: 'end', inline: 'nearest', behavior: 'smooth'});
+                }).catch(function (error) {
+                    console.log('Fetch error:', error.message);
+                });
+            }
+        }
+
+        //CALL FETCH ON BUTTON CLICK
+        button.addEventListener('click', fetchAndUpdateHTML);
+
+        //CALL FETCH ON ENTER KEY
+        inputField.addEventListener('keydown', function (event){
+            if (event.key === 'Enter'){
+                event.preventDefault();
+                fetchAndUpdateHTML();
+                inputField.value = '';
+            }
+        })
+
+        //CHECK IF USER INPUT IS NOT EMPTY OR SPACES ONLY
+        function isInputValid(input) {
+            return input.trim() !== '' && true;
+        }
     </script>
 </body>
 </html>

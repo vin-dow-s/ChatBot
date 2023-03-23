@@ -17,5 +17,3 @@ use App\Http\Controllers\ChatBotController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::post('send', [ChatBotController::class, 'sendChat']);

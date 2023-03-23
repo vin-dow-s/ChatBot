@@ -50,40 +50,43 @@ body {
         }
     }
 
-    .messages-user {
+    .messages-user, .messages-bot {
         display: flex;
+        width: 60%;
+        height: auto;
+        margin: 0.5em;
+        font-family: 'Supreme', sans-serif;
+
+        img {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    .messages-user {
         justify-content: end;
         float: right;
-        width: 60%;
-        height: 2em;
-        margin: .5em;
-        padding-top: 1em;
-        font-family: 'Supreme', sans-serif;
 
         .__user {
             width: fit-content;
             height: fit-content;
-            margin-right: .2em;
-            padding: .4em;
+            margin-right: 0.2em;
+            padding: 0.4em;
             background: lightgreen;
             border-radius: 5px;
             color: $black;
         }
     }
+
     .messages-bot {
-        display: flex;
         justify-content: left;
-        width: 60%;
-        height: 2em;
-        margin: .5em;
-        font-family: 'Supreme', sans-serif;
 
         .__bot {
             text-align: left;
             width: fit-content;
             height: fit-content;
-            margin-left: .3em;
-            padding: .4em;
+            margin-left: 0.3em;
+            padding: 0.4em;
             background: $grey;
             border-radius: 5px;
             color: $black;
@@ -101,6 +104,7 @@ body {
         border-top: 1px solid $white;
 
         > input {
+            resize: none;
             width: 100%;
             padding: 10px;
             margin-right: 10px;
