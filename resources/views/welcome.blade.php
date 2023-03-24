@@ -9,6 +9,8 @@
 
     <link href="https://api.fontshare.com/v2/css?f[]=supreme@400&f[]=technor@600,400&display=swap" rel="stylesheet">
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.png') }}">
+
     @vite(['public/scss/app.scss', 'public/scss/app.css', 'public/js/app.js'])
 
     <script src="{{ asset('js/app.js')}}"></script>
